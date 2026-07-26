@@ -1,0 +1,14 @@
+package com.example.nto.repository;
+
+import com.example.nto.entity.Employee;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    // @EntityGraph(attributePaths = {"bookingList", "bookingList.place"})
+    Employee findByUsername(String username);
+    @EntityGraph(attributePaths = {"bookingList", "bookingList.place"})
+    Employee getByUsername(String username);
+}

@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/application_db
+    username: innovationcampus
+    password: springserver124@
+    driver: org.postgresql.Driver
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    generate-ddl: false
+
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db.changelog/db.changelog-master.xml
+
+server:
+  port: 49175
+
+booking:
+  days-ahead: 3
+
+auth:
+  wrong-logins-until-block: 5

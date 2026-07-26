@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2026-02-25--0007-place-modify" author="okalugin">
+        <preConditions onFail="MARK_RAN">
+                <tableExists tableName="place"/>
+                <not>
+                    <columnExists tableName="place" columnName="account_id"/>
+                </not>
+        </preConditions>
+
+        <addColumn tableName="place">
+                <column name="account_id" type="BIGINT">
+                    <constraints nullable="false" foreignKeyName="fk_place_employee" referencedTableName="employee"
+                                 referencedColumnNames="id"/>
+                </column>
+            <column name="description" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

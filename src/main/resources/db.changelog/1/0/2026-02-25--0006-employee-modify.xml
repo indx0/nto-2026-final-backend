@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2026-02-25--0006-employee-modify-drop-code" author="okalugin">
+        <preConditions onFail="MARK_RAN">
+                <tableExists tableName="employee"/>
+                <columnExists tableName="employee" columnName="code"/>
+        </preConditions>
+
+        <dropColumn tableName="employee" columnName="code"/>
+    </changeSet>
+
+    <changeSet id="2026-02-25--0006-employee-modify-add-username" author="okalugin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="employee"/>
+            <not>
+                <columnExists tableName="employee" columnName="username"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="employee">
+            <column name="username" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2026-02-25--0006-employee-modify-add-password" author="okalugin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="employee"/>
+            <not>
+                <columnExists tableName="employee" columnName="password"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="employee">
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2026-02-25--0006-employee-modify-add-failed-logins" author="okalugin">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="employee"/>
+            <not>
+                <columnExists tableName="employee" columnName="failed_logins"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="employee">
+            <column name="failed_logins" type="BIGINT" defaultValue="0">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
